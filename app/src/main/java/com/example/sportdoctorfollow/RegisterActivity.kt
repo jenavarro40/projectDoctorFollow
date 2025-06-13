@@ -85,7 +85,7 @@ class RegisterActivity : AppCompatActivity() {
                 //val insertUser = users("Javier","carrcour","259","ja@mail.com","javier",typeOfUser)
                 //firestoreHelper.addUser(this,insertUser)
             }
-            if (name.text.toString().equals("")) {
+            if (name.text.toString().equals("")  ) {
                 flagIssue = true
             }
             if (address.text.toString().equals("")) {
@@ -97,7 +97,7 @@ class RegisterActivity : AppCompatActivity() {
             if (email.text.toString().equals("") or !Patterns.EMAIL_ADDRESS.matcher(email.toString()).matches()) {
                 flagIssue = true
             }
-            if (name.text.toString().equals("")) {
+            if (password.text.toString().equals("")) {
                 flagIssue = true
             }
         }
