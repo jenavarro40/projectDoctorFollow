@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">SportDoctorFollow</string>
+    <string name="userNameTxtE">UserName@email.com</string>
+    <string name="passwordTxtE">Password</string>
+    <string name="textviewWelcome">Welcome to the Health App</string>
+    <string name="SignIn">Sign In</string>
+    <string name="RegisterNow">Register Now</string>
+    <string name="firstwelcome">Welcome to the Health</string>
+    <string name="questionregisternow">Not a member?</string>
+    <string name="welcomeregister">Welcome to improve your Healt</string>
+    <string name="name_reg">Name</string>
+    <string name="address_Reg">Address</string>
+    <string name="phone_reg">+1 123-456-7890</string>
+    <string name="email_reg">email@email.com</string>
+    <string name="doctor">Doctor</string>
+    <string name="Trainer">Trainer</string>
+    <string name="Nutricionist">Nutricionist</string>
+    <string name="SportPerson">Sport Person</string>
+    <string name="Beginner">Beginner</string>
+    <string name="RegisterBtn">Register</string>
+</resources>

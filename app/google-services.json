@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "111744960424",
+    "project_id": "sport-medicine",
+    "storage_bucket": "sport-medicine.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:111744960424:android:e5ed86b5c1f97f0cc2ff9d",
+        "android_client_info": {
+          "package_name": "com.example.sportdoctorfollow"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFE7WHJ07os2arUgjqA8RlnJuTea9oWiI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

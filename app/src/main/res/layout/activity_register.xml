@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/greenpastel"
+    tools:context=".RegisterActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="4dp"
+        android:gravity="center"
+        android:text="@string/welcomeregister"
+        android:textColor="#888888"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/NameTxtE"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/NameTxtE"
+        android:layout_width="@dimen/button_width"
+        android:layout_height="@dimen/button_heigth"
+        android:layout_marginBottom="49dp"
+        android:ems="10"
+        android:hint="@string/name_reg"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/addressTxtE"
+        app:layout_constraintEnd_toEndOf="@+id/addressTxtE"
+        app:layout_constraintStart_toStartOf="@+id/addressTxtE"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <EditText
+        android:id="@+id/paswRegTxtE"
+        android:layout_width="@dimen/button_width"
+        android:layout_height="@dimen/button_heigth"
+        android:layout_marginEnd="7dp"
+        android:layout_marginBottom="30dp"
+        android:ems="10"
+        android:hint="@string/passwordTxtE"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/typeosuserRdnBTN"
+        app:layout_constraintEnd_toEndOf="@+id/typeosuserRdnBTN"
+        app:layout_constraintTop_toBottomOf="@+id/emailTxtE" />
+
+    <RadioGroup
+        android:id="@+id/typeosuserRdnBTN"
+        android:layout_width="261dp"
+        android:layout_height="125dp"
+        android:layout_marginStart="39dp"
+        android:layout_marginBottom="14dp"
+        app:layout_constraintBottom_toTopOf="@+id/RegisterSendBtn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/paswRegTxtE">
+
+        <RadioButton
+            android:id="@+id/doctorRadBtn"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:text="@string/doctor"
+            android:textSize="12sp" />
+
+        <RadioButton
+            android:id="@+id/trainerRadBtn"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:text="@string/Trainer"
+            android:textSize="12sp"/>
+
+        <RadioButton
+            android:id="@+id/nutrisionistRadBtn"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:text="@string/Nutricionist"
+            android:textSize="12sp"/>
+
+        <RadioButton
+            android:id="@+id/sportPersonRadBtn"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:text="@string/SportPerson"
+            android:textSize="12sp"/>
+
+        <RadioButton
+            android:id="@+id/BeginnerRadBtn"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:text="@string/Beginner"
+            android:textSize="12sp"/>
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/PhoneTxtE"
+        android:layout_width="@dimen/button_width"
+        android:layout_height="48dp"
+        android:layout_marginBottom="40dp"
+        android:ems="10"
+        android:hint="@string/phone_reg"
+        android:inputType="phone"
+        app:layout_constraintBottom_toTopOf="@+id/emailTxtE"
+        app:layout_constraintEnd_toEndOf="@+id/emailTxtE"
+        app:layout_constraintStart_toStartOf="@+id/emailTxtE"
+        app:layout_constraintTop_toBottomOf="@+id/addressTxtE" />
+
+    <EditText
+        android:id="@+id/emailTxtE"
+        android:layout_width="@dimen/button_width"
+        android:layout_height="@dimen/button_heigth"
+        android:layout_marginBottom="43dp"
+        android:ems="10"
+        android:hint="@string/email_reg"
+        android:inputType="textEmailAddress"
+        app:layout_constraintBottom_toTopOf="@+id/paswRegTxtE"
+        app:layout_constraintEnd_toEndOf="@+id/paswRegTxtE"
+        app:layout_constraintStart_toStartOf="@+id/paswRegTxtE"
+        app:layout_constraintTop_toBottomOf="@+id/PhoneTxtE" />
+
+    <EditText
+        android:id="@+id/addressTxtE"
+        android:layout_width="@dimen/button_width"
+        android:layout_height="@dimen/button_heigth"
+        android:layout_marginBottom="41dp"
+        android:ems="10"
+        android:hint="@string/address_Reg"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/PhoneTxtE"
+        app:layout_constraintEnd_toEndOf="@+id/PhoneTxtE"
+        app:layout_constraintStart_toStartOf="@+id/PhoneTxtE"
+        app:layout_constraintTop_toBottomOf="@+id/NameTxtE" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="left" />
+
+    <Button
+        android:id="@+id/RegisterSendBtn"
+        android:layout_width="@dimen/button_width"
+        android:layout_height="@dimen/button_heigth"
+        android:layout_marginBottom="21dp"
+        android:backgroundTint="@color/buttoncolormain"
+        android:text="@string/RegisterBtn"
+        app:cornerRadius="@dimen/button_corner_radius"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/typeosuserRdnBTN" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
