@@ -28,7 +28,7 @@ class RegisterActivity : AppCompatActivity() {
         val phone: EditText
         val email: EditText
         val password: EditText
-        var flagIssue: Boolean
+        //var flagIssue: Boolean
 
 
         super.onCreate(savedInstanceState)
@@ -47,7 +47,7 @@ class RegisterActivity : AppCompatActivity() {
         phone = findViewById(R.id.PhoneTxtE)
         email = findViewById(R.id.emailTxtE)
         password = findViewById(R.id.paswRegTxtE)
-        flagIssue = false
+        //flagIssue = false
 
 
 
@@ -80,26 +80,33 @@ class RegisterActivity : AppCompatActivity() {
 
         registerBtn.setOnClickListener()
         {
-            if (typeOfUser == 0) {
-                flagIssue = true
-                //val insertUser = users("Javier","carrcour","259","ja@mail.com","javier",typeOfUser)
-                //firestoreHelper.addUser(this,insertUser)
+
+            if (name.text.toString().equals("") || name.text.toString().length < 5 ) {
+                Toast.makeText(this, "Please enter a correct name", Toast.LENGTH_SHORT).show()
             }
-            if (name.text.toString().equals("")  ) {
-                flagIssue = true
+            else if (address.text.toString().equals("") || address.text.toString().length < 6 ) {
+                Toast.makeText(this, "Please enter a correct address", Toast.LENGTH_SHORT).show()
             }
-            if (address.text.toString().equals("")) {
-                flagIssue = true
+            else if (phone.text.toString().equals("") || !Patterns.PHONE.matcher(phone.toString()).matches() || phone.toString().length < 10) {
+                Toast.makeText(this, "Please enter a correct phone number", Toast.LENGTH_SHORT).show()
             }
-            if (phone.text.toString().equals("") or !Patterns.PHONE.matcher(phone.toString()).matches()) {
-                flagIssue = true
+            else if (email.text.toString().equals("") || !Patterns.EMAIL_ADDRESS.matcher(email.toString()).matches())  {
+                Toast.makeText(this, "Please enter a correct e-mail address", Toast.LENGTH_SHORT).show()
             }
-            if (email.text.toString().equals("") or !Patterns.EMAIL_ADDRESS.matcher(email.toString()).matches()) {
-                flagIssue = true
+            else if (password.text.toString().equals("") || password.text.toString().length < 6) {
+                Toast.makeText(this, "Please enter a correct password", Toast.LENGTH_SHORT).show()
             }
-            if (password.text.toString().equals("")) {
-                flagIssue = true
+            else if (typeOfUser == 0) {
+                Toast.makeText(this, "Please select one type of user ", Toast.LENGTH_SHORT).show()
+
             }
+            else {
+                val insertUser = users(name.text.toString(),address.text.toString(),phone.text.toString(),email.text.toString(),password.text.toString(),typeOfUser)
+                firestoreHelper.addUser(this,insertUser)
+
+            }
+
+
         }
 
 
