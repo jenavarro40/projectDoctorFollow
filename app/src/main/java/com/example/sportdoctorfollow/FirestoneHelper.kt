@@ -43,9 +43,9 @@ class FirestoneHelper {
 
     }
 
-    fun loginUser(username: String, plainPassword: String, onResult: (Boolean) -> Unit) {
+    fun loginUser(context: Context,username: String, plainPassword: String, onResult: (Boolean) -> Unit) {
         db.collection("users")
-            .whereEqualTo("username", username)
+            .whereEqualTo("email", username)
             .get()
             .addOnSuccessListener { documents ->
                 if (!documents.isEmpty) {
@@ -53,7 +53,7 @@ class FirestoneHelper {
                     val isValid = verifyPassword(plainPassword, user.password)
                     onResult(isValid)
                 } else {
-
+                    Toast.makeText(context, "Error in email or password", Toast.LENGTH_SHORT).show()
                     onResult(false)
                 }
             }

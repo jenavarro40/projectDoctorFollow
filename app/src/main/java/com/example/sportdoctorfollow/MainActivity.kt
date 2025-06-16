@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+//import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 
@@ -25,15 +26,36 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        var registerBtn: Button = findViewById(R.id.registerBtn)
-        var signInBtn: Button = findViewById(R.id.signInBtn)
-        var userNameTxtE: EditText = findViewById(R.id.userNameTxtE)
-        var passwordTxtE: EditText = findViewById(R.id.PasswordTxtE)
+        val registerBtn: Button = findViewById(R.id.registerBtn)
+        val signInBtn: Button = findViewById(R.id.signInBtn)
+        val userNameTxtE: EditText = findViewById(R.id.userNameTxtE)
+        val passwordTxtE: EditText = findViewById(R.id.PasswordTxtE)
+
 
         registerBtn.setOnClickListener() {
-            val intent = Intent(this@MainActivity, RegisterActivity::class.java)
+            val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
         }
 
+        signInBtn.setOnClickListener() {
+            val firestoreHelper = FirestoneHelper()
+
+
+            firestoreHelper.loginUser(
+                this, userNameTxtE.text.toString(), passwordTxtE.text.toString())
+            { resultValid ->
+                if (resultValid) {
+                    val intent = Intent(this, ListofActivities::class.java)
+                    intent.putExtra("email", userNameTxtE.text.toString())
+                    startActivity(intent)
+                } else {
+                    Toast.makeText(this, "is {$resultValid}", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+                //val a=firestoreHelper.hashPassword("1234567")
+                //val resultSignin=firestoreHelper.verifyPassword("1234567",a)
+
+        }
     }
 }

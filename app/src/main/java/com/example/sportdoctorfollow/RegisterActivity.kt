@@ -1,5 +1,6 @@
 package com.example.sportdoctorfollow
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
 import android.widget.Button
@@ -20,7 +21,7 @@ class RegisterActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        val firestoreHelper = FirestoneHelper()
+
         val userTypeRadGrp: RadioGroup
         val registerBtn: Button
         val name: EditText
@@ -47,6 +48,8 @@ class RegisterActivity : AppCompatActivity() {
         phone = findViewById(R.id.PhoneTxtE)
         email = findViewById(R.id.emailTxtE)
         password = findViewById(R.id.paswRegTxtE)
+        val firestoreHelper = FirestoneHelper()
+
         //flagIssue = false
 
 
@@ -81,36 +84,46 @@ class RegisterActivity : AppCompatActivity() {
         registerBtn.setOnClickListener()
         {
 
-            if (name.text.toString().equals("") || name.text.toString().length < 5 ) {
-                Toast.makeText(this, "Please enter a correct name", Toast.LENGTH_SHORT).show()
-            }
-            else if (address.text.toString().equals("") || address.text.toString().length < 6 ) {
-                Toast.makeText(this, "Please enter a correct address", Toast.LENGTH_SHORT).show()
-            }
-            else if (phone.text.toString().equals("") || !Patterns.PHONE.matcher(phone.toString()).matches() || phone.toString().length < 10) {
-                Toast.makeText(this, "Please enter a correct phone number", Toast.LENGTH_SHORT).show()
-            }
-            else if (email.text.toString().equals("") || !Patterns.EMAIL_ADDRESS.matcher(email.toString()).matches())  {
-                Toast.makeText(this, "Please enter a correct e-mail address", Toast.LENGTH_SHORT).show()
-            }
-            else if (password.text.toString().equals("") || password.text.toString().length < 6) {
-                Toast.makeText(this, "Please enter a correct password", Toast.LENGTH_SHORT).show()
-            }
-            else if (typeOfUser == 0) {
-                Toast.makeText(this, "Please select one type of user ", Toast.LENGTH_SHORT).show()
+            val nameStr = name.text.toString()
+            val addressStr = address.text.toString()
+            val phoneStr = phone.text.toString()
+            val emailStr = email.text.toString()
+            val passStr = password.text.toString()
+
+            when {
+                nameStr.isBlank() || nameStr.length < 5 ->
+                    showToast("Please enter a correct name")
+
+                addressStr.isBlank() || addressStr.length < 6 ->
+                    showToast("Please enter a correct address")
+
+                phoneStr.isBlank() || !Patterns.PHONE.matcher(phoneStr).matches()  ->
+                    showToast("Please enter a correct phone number")
+
+                emailStr.isBlank() || !Patterns.EMAIL_ADDRESS.matcher(emailStr).matches() ->
+                    showToast("Please enter a correct e-mail address")
+
+                passStr.isBlank() || passStr.length < 6 ->
+                    showToast("Please enter a correct password")
+
+                typeOfUser == 0 ->
+                    showToast("Please select one type of user")
+
+                else -> {
+                    val insertUser = users(nameStr, addressStr, phoneStr, emailStr, passStr, typeOfUser)
+                    firestoreHelper.addUser(this, insertUser)
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+                }
 
             }
-            else {
-                val insertUser = users(name.text.toString(),address.text.toString(),phone.text.toString(),email.text.toString(),password.text.toString(),typeOfUser)
-                firestoreHelper.addUser(this,insertUser)
-
-            }
-
-
         }
 
 
         //
 
+    }
+    private fun showToast(msg: String) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
     }
 }
