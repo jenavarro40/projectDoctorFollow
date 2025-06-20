@@ -18,4 +18,5 @@
     <string name="SportPerson">Sport Person</string>
     <string name="Beginner">Beginner</string>
     <string name="RegisterBtn">Register</string>
+    <string name="pacientSpin">Pacient :</string>
 </resources>
