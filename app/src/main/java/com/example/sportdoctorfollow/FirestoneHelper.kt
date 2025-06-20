@@ -43,7 +43,7 @@ class FirestoneHelper {
 
     }
 
-    fun loginUser(context: Context,username: String, plainPassword: String, onResult: (Boolean) -> Unit) {
+    fun loginUser(context: Context,username: String, plainPassword: String, onResult: (Boolean,Int) -> Unit) {
         db.collection("users")
             .whereEqualTo("email", username)
             .get()
@@ -51,10 +51,10 @@ class FirestoneHelper {
                 if (!documents.isEmpty) {
                     val user = documents.first().toObject(users::class.java)
                     val isValid = verifyPassword(plainPassword, user.password)
-                    onResult(isValid)
+                    onResult(isValid,user.usertype)
                 } else {
                     Toast.makeText(context, "Error in email or password", Toast.LENGTH_SHORT).show()
-                    onResult(false)
+                    onResult(false,-1)
                 }
             }
             .addOnFailureListener {exception ->
@@ -62,6 +62,31 @@ class FirestoneHelper {
                 Log.w("FirestoreHelper", "Error in check user", exception)
             }
     }
+
+    fun getUsersforDoctor(context: Context,pacients: (List<Pair<String,String>>) -> Unit) {
+        db.collection("users")
+            .whereEqualTo("usertype", 1)
+            .get()
+            .addOnSuccessListener { documents ->
+                if (!documents.isEmpty) {
+                    val pacientList = mutableListOf<Pair<String, String>>()
+                    for (doc in documents){
+                        val user = doc.toObject(users::class.java)
+                        pacientList.add(Pair(user.email,user.name))
+                    }
+                    pacients(pacientList)
+
+                } else {
+                    Toast.makeText(context, "There is not Pacient", Toast.LENGTH_SHORT).show()
+                    pacients(mutableListOf())
+                }
+            }
+            .addOnFailureListener {exception ->
+
+                Log.w("FirestoreHelper", "Error in read pacients", exception)
+            }
+    }
+
 
     private fun hashPassword(password: String): String {
         return at.favre.lib.crypto.bcrypt.BCrypt.withDefaults()

@@ -39,15 +39,38 @@ class MainActivity : AppCompatActivity() {
 
         signInBtn.setOnClickListener() {
             val firestoreHelper = FirestoneHelper()
-
-
             firestoreHelper.loginUser(
                 this, userNameTxtE.text.toString(), passwordTxtE.text.toString())
-            { resultValid ->
+            { resultValid,typeofuser ->
                 if (resultValid) {
-                    val intent = Intent(this, ListofActivities::class.java)
-                    intent.putExtra("email", userNameTxtE.text.toString())
-                    startActivity(intent)
+                    when (typeofuser){
+                        1 ->{
+                            val intent = Intent(this, UsersActivity::class.java)
+                            intent.putExtra("email", userNameTxtE.text.toString())
+                            startActivity(intent)
+                        }
+                        2 ->{
+                            val intent = Intent(this, UsersActivity::class.java)
+                            intent.putExtra("email", userNameTxtE.text.toString())
+                            startActivity(intent)
+                        }
+                        3 ->{
+                            val intent = Intent(this, FoodActivity::class.java)
+                            intent.putExtra("email", userNameTxtE.text.toString())
+                            startActivity(intent)
+                        }
+                        4 ->{
+                            val intent = Intent(this, ExorciseActivity::class.java)
+                            intent.putExtra("email", userNameTxtE.text.toString())
+                            startActivity(intent)
+                        }
+                        5 ->{
+                            val intent = Intent(this, DoctorActivity::class.java)
+                            intent.putExtra("email", userNameTxtE.text.toString())
+                            startActivity(intent)
+                        }
+                    }
+
                 } else {
                     Toast.makeText(this, "is {$resultValid}", Toast.LENGTH_SHORT).show()
                 }
