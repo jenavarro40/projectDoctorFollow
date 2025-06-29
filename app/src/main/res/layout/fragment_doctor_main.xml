@@ -2,32 +2,34 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DoctorActivity">
+    android:background="@color/greenpastel"
+    tools:context=".DoctorMainFragment">
 
+    <!-- TODO: Update blank fragment layout -->
 
     <TextView
-        android:id="@+id/DoctorMainTitle"
+        android:id="@+id/titlePacient"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="8dp"
-        android:text="@string/DoctorMainTitle"
-        app:layout_constraintBottom_toTopOf="@+id/fragmentContainerView"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="25dp"
+        android:text="@string/pacientSpin"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/listPacients"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainerView"
-        android:name="com.example.sportdoctorfollow.DoctorExamCheckFragment"
-        android:layout_width="0dp"
+    <ListView
+        android:id="@+id/listPacients"
+        android:layout_width="352dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="3dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="183dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/DoctorMainTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/titlePacient" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

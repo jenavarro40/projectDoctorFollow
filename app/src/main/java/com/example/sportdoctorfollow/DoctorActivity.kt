@@ -23,28 +23,9 @@ class DoctorActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        val spinnerPacients: Spinner=findViewById(R.id.pacientSpin)
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragmentContainerView, DoctorMainFragment.newInstance("param1", "param2"))
+            .commit()
 
-        val firestoreHelper= FirestoneHelper()
-        firestoreHelper.getUsersforDoctor(this, { pacients ->
-            var textPacients:MutableList<String>
-            textPacients=(mutableListOf())
-            for (pac in pacients){
-                textPacients.add("${pac.second}")
-            }
-            val adapter = ArrayAdapter(
-                this,
-                android.R.layout.simple_spinner_item,
-                textPacients
-            )
-
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-
-            // Asignar al Spinner
-            spinnerPacients.adapter = adapter
-
-
-
-        })
     }
 }
