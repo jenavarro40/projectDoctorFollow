@@ -6,10 +6,10 @@ import android.widget.Toast
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
-class FirestoneHelper {
+class FirestoreHelper {
     private val db = Firebase.firestore
 
-    // Función para agregar un usuario a Firestore
+
     fun addUser(context: Context, user: users) {
         db.collection("users")
             .whereEqualTo("email", user.email)

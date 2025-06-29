@@ -48,7 +48,7 @@ class RegisterActivity : AppCompatActivity() {
         phone = findViewById(R.id.PhoneTxtE)
         email = findViewById(R.id.emailTxtE)
         password = findViewById(R.id.paswRegTxtE)
-        val firestoreHelper = FirestoneHelper()
+        val firestoreHelper = FirestoreHelper()
 
         //flagIssue = false
 

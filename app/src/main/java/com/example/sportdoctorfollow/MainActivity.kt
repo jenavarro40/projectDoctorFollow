@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         signInBtn.setOnClickListener() {
-            val firestoreHelper = FirestoneHelper()
+            val firestoreHelper = FirestoreHelper()
             firestoreHelper.loginUser(
                 this, userNameTxtE.text.toString(), passwordTxtE.text.toString())
             { resultValid,typeofuser ->
