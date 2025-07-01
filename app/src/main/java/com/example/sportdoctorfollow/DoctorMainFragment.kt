@@ -56,11 +56,19 @@ class DoctorMainFragment : Fragment() {
             listView.adapter = adapter
 
             listView.setOnItemClickListener { _, _, position, _ ->
-                Toast.makeText(
-                    requireContext(),
-                    "Seleccionaste: ${textPacients[position]}",
-                    Toast.LENGTH_SHORT
-                ).show()
+                val examCheckfragment = DoctorExamCheckFragment()
+                val bundle = Bundle()
+                bundle.putString("email", pacients[position].first)
+                bundle.putString("name",pacients[position].second)
+
+
+                examCheckfragment.arguments = bundle
+
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.fragmentContainerView, examCheckfragment)
+                    .addToBackStack(null)
+                    .commit()
+
             }
 
         })

@@ -1,14 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/greenpastel"
     tools:context=".DoctorExamCheckFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
 
-</FrameLayout>
+    <Button
+        android:id="@+id/OrderTestBtn"
+        android:layout_width="151dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="219dp"
+        android:backgroundTint="@color/buttoncolormain"
+        android:text="@string/OrderExamBtn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:cornerRadius="@dimen/button_corner_radius" />
+
+    <Button
+        android:id="@+id/ViewTestBTn"
+        android:layout_width="172dp"
+        android:layout_height="43dp"
+        android:layout_marginEnd="33dp"
+        android:backgroundTint="@color/buttoncolormain"
+        android:text="@string/viewTestBtn"
+        app:layout_constraintBaseline_toBaselineOf="@+id/OrderTestBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:cornerRadius="@dimen/button_corner_radius" />
+
+    <TextView
+        android:id="@+id/nameDoctorCheckTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="48dp"
+        app:layout_constraintStart_toEndOf="@+id/pacientMark"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:textSize="20sp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/ExamsRecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="230dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="116dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="116dp"
+        app:layout_constraintBottom_toBottomOf="@+id/ViewTestBTn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/pacientMark" />
+
+    <TextView
+        android:id="@+id/pacientMark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/pacientMark"
+        app:layout_constraintBaseline_toBaselineOf="@+id/nameDoctorCheckTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/pacientMark2"
+        android:layout_width="290dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="15dp"
+        android:text="@string/OrderExam"
+        app:layout_constraintBottom_toTopOf="@+id/ExamsRecyclerView"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:textSize="20sp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

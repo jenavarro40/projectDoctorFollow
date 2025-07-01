@@ -5,6 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.LinearLayoutManager
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -36,6 +39,30 @@ class DoctorExamCheckFragment : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_doctor_exam_check, container, false)
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val recyclerView = view.findViewById<RecyclerView>(R.id.ExamsRecyclerView)
+
+        val email = arguments?.getString("email")
+        val name = arguments?.getString("name")
+
+        val nameTxtView=view.findViewById<TextView>(R.id.nameDoctorCheckTitle)
+        nameTxtView.setText(name)
+
+        val examNames = arrayOf("Blood Test", "Urine Test", "Electrocardigram")
+        val examImages = intArrayOf(
+            R.drawable.bloodtest,
+            R.drawable.urinetest,
+            R.drawable.electrotest
+        )
+
+        val adapter = RecyclerAdapter(requireContext(), examImages, examNames)
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+    }
+
 
     companion object {
         /**
