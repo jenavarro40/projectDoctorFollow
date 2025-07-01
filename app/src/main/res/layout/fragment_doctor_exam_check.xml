@@ -23,6 +23,19 @@
         tools:cornerRadius="@dimen/button_corner_radius" />
 
     <Button
+        android:id="@+id/sugWorkoutBtn"
+        android:layout_width="144dp"
+        android:layout_height="62dp"
+        android:layout_marginBottom="140dp"
+        android:backgroundTint="@color/buttoncolormain"
+        android:text="@string/sugestedWorkoutsBtn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/OrderTestBtn"
+        tools:cornerRadius="@dimen/button_corner_radius" />
+
+    <Button
         android:id="@+id/ViewTestBTn"
         android:layout_width="172dp"
         android:layout_height="43dp"
