@@ -52,6 +52,7 @@ class DoctorExamCheckFragment : Fragment() {
 
         val email:String = arguments?.getString("email").toString()
         val name:String = arguments?.getString("name").toString()
+        val doctor:String= arguments?.getString("userDoctorTest").toString()
 
         val nameTxtView = view.findViewById<TextView>(R.id.nameDoctorCheckTitle)
         nameTxtView.setText(name)
@@ -72,7 +73,7 @@ class DoctorExamCheckFragment : Fragment() {
         testreqestBtn.setOnClickListener {
             val selection = adapter.getSelectedItems()
             val testrequestdata = selectedPositionsToNumber(selection)
-            val insertTest = testrequest(name,email,testrequestdata)
+            val insertTest = testrequest(name,email,testrequestdata,doctor)
             firestoreHelper.testRequest(requireContext(), insertTest)
 
         }

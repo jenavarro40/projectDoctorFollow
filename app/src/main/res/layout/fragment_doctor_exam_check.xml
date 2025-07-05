@@ -52,6 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="21dp"
         android:layout_marginTop="48dp"
+        android:textColor="@color/black"
         app:layout_constraintStart_toEndOf="@+id/pacientMark"
         app:layout_constraintTop_toTopOf="parent"
         tools:textSize="20sp" />
@@ -75,6 +76,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="@string/pacientMark"
+        android:textColor="@color/black"
         app:layout_constraintBaseline_toBaselineOf="@+id/nameDoctorCheckTitle"
         app:layout_constraintStart_toStartOf="parent"
         tools:textSize="20sp" />
@@ -86,6 +88,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginBottom="15dp"
         android:text="@string/OrderExam"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/ExamsRecyclerView"
         app:layout_constraintStart_toStartOf="parent"
         tools:textSize="20sp" />

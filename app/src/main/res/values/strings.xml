@@ -25,4 +25,5 @@
     <string name="OrderExamBtn">Order Test</string>
     <string name="viewTestBtn" >View Test</string>
     <string name="sugestedWorkoutsBtn">Get Suggested Workout</string>
+    <string name="UserFollow">Follow:</string>
 </resources>

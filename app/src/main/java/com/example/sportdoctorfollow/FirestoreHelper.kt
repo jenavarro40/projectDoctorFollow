@@ -121,6 +121,27 @@ class FirestoreHelper {
             }
     }
 
+    fun getUsersone(context: Context,usermail:String, result: (String) -> Unit) {
+        db.collection("users")
+            .whereEqualTo("email", usermail)
+            .limit(1)
+            .get()
+            .addOnSuccessListener { documents ->
+                if (!documents.isEmpty) {
+                    val user = documents.first().toObject(users::class.java)
+                    result(user.name)
+
+                } else {
+                    Toast.makeText(context, "There was aproblem please Check", Toast.LENGTH_SHORT).show()
+                    result("")
+                }
+            }
+            .addOnFailureListener {exception ->
+
+                Log.w("FirestoreHelper", "Error in read user", exception)
+            }
+    }
+
 
     private fun hashPassword(password: String): String {
         return at.favre.lib.crypto.bcrypt.BCrypt.withDefaults()
