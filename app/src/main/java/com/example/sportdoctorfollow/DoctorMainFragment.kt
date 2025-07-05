@@ -52,7 +52,7 @@ class DoctorMainFragment : Fragment() {
                 textPacients.add("${pac.second}")
             }
             val adapter =
-                ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, textPacients)
+                ArrayAdapter(requireContext(), R.layout.spinner_items, textPacients)
             listView.adapter = adapter
 
             listView.setOnItemClickListener { _, _, position, _ ->
