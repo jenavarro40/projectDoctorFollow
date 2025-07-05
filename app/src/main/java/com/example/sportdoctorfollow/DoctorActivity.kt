@@ -23,8 +23,9 @@ class DoctorActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        val userNameDoctor:String = intent.getStringExtra("email").toString()
         supportFragmentManager.beginTransaction()
-            .replace(R.id.fragmentContainerView, DoctorMainFragment.newInstance("param1", "param2"))
+            .replace(R.id.fragmentContainerView, DoctorMainFragment.newInstance(userNameDoctor, "param2"))
             .commit()
 
     }

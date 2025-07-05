@@ -19,7 +19,11 @@
     <string name="Beginner">Beginner</string>
     <string name="RegisterBtn">Register</string>
     <string name="pacientSpin">Pacient :</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="DoctorMainTitle">Doctor Main</string>
+    <string name="pacientMark">Pacient:</string>
+    <string name="OrderExam">Order following Test to pacient:</string>
+    <string name="OrderExamBtn">Order Test</string>
+    <string name="viewTestBtn" >View Test</string>
+    <string name="sugestedWorkoutsBtn">Get Suggested Workout</string>
+    <string name="UserFollow">Follow:</string>
 </resources>

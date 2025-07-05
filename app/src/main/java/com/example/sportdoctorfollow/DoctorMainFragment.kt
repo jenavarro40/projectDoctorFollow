@@ -11,7 +11,7 @@ import android.widget.Toast
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
+private const val ARG_USER_DOCTOR = "userDoctor"
 private const val ARG_PARAM2 = "param2"
 
 /**
@@ -21,13 +21,13 @@ private const val ARG_PARAM2 = "param2"
  */
 class DoctorMainFragment : Fragment() {
     // TODO: Rename and change types of parameters
-    private var param1: String? = null
+    private var userDoctor: String? = null
     private var param2: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
+            userDoctor = it.getString(ARG_USER_DOCTOR)
             param2 = it.getString(ARG_PARAM2)
         }
     }
@@ -52,15 +52,24 @@ class DoctorMainFragment : Fragment() {
                 textPacients.add("${pac.second}")
             }
             val adapter =
-                ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, textPacients)
+                ArrayAdapter(requireContext(), R.layout.spinner_items, textPacients)
             listView.adapter = adapter
 
             listView.setOnItemClickListener { _, _, position, _ ->
-                Toast.makeText(
-                    requireContext(),
-                    "Seleccionaste: ${textPacients[position]}",
-                    Toast.LENGTH_SHORT
-                ).show()
+                val examCheckfragment = DoctorExamCheckFragment()
+                val bundle = Bundle()
+                bundle.putString("email", pacients[position].first)
+                bundle.putString("name",pacients[position].second)
+                bundle.putString("userDoctorTest",userDoctor)
+
+
+                examCheckfragment.arguments = bundle
+
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.fragmentContainerView, examCheckfragment)
+                    .addToBackStack(null)
+                    .commit()
+
             }
 
         })
@@ -77,10 +86,10 @@ class DoctorMainFragment : Fragment() {
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance(userDoctor: String, param2: String) =
             DoctorMainFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
+                    putString(ARG_USER_DOCTOR, userDoctor)
                     putString(ARG_PARAM2, param2)
                 }
             }

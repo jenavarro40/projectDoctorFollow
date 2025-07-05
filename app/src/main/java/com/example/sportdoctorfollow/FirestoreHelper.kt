@@ -37,10 +37,6 @@ class FirestoreHelper {
             .addOnFailureListener { exception ->
                 Log.w("FirestoreHelper", "Error in check user", exception)
             }
-
-
-
-
     }
 
     fun loginUser(context: Context,username: String, plainPassword: String, onResult: (Boolean,Int) -> Unit) {
@@ -84,6 +80,65 @@ class FirestoreHelper {
             .addOnFailureListener {exception ->
 
                 Log.w("FirestoreHelper", "Error in read pacients", exception)
+            }
+    }
+
+    fun testRequest(context: Context, request: testrequest ) {
+        db.collection("testrequest")
+            .whereEqualTo("email", request.email)
+            .limit(1)
+            .get()
+            .addOnSuccessListener { documents ->
+                if (documents.isEmpty){
+                    db.collection("testrequest")
+                        .add(request)
+                        .addOnSuccessListener { documentReference ->
+                            Log.d("FirestoreHelper", "Requested Test: ${request.name}")
+                            Toast.makeText(context, "Requested Test: ${documentReference.id}", Toast.LENGTH_SHORT).show()
+                        }
+                        .addOnFailureListener { e ->
+                            Log.w("FirestoreHelper", "Error RequestedTest", e)
+                        }
+
+                }
+                else {
+                    val docId = documents.documents[0].id
+                    val updateMap = mapOf("testrequest" to request.testrequest)
+
+                    db.collection("testrequest").document(docId)
+                        .update(updateMap)
+                        .addOnSuccessListener {
+                            Log.d("FirestoreHelper", "Requested Test updated for: ${request.email}")
+                            Toast.makeText(context, "Requested Test updated", Toast.LENGTH_SHORT).show()
+                        }
+                        .addOnFailureListener { e ->
+                            Log.w("FirestoreHelper", "Error updating test request", e)
+                        }
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.w("FirestoreHelper", "Error in check user", exception)
+            }
+    }
+
+    fun getUsersone(context: Context,usermail:String, result: (String) -> Unit) {
+        db.collection("users")
+            .whereEqualTo("email", usermail)
+            .limit(1)
+            .get()
+            .addOnSuccessListener { documents ->
+                if (!documents.isEmpty) {
+                    val user = documents.first().toObject(users::class.java)
+                    result(user.name)
+
+                } else {
+                    Toast.makeText(context, "There was aproblem please Check", Toast.LENGTH_SHORT).show()
+                    result("")
+                }
+            }
+            .addOnFailureListener {exception ->
+
+                Log.w("FirestoreHelper", "Error in read user", exception)
             }
     }
 

@@ -17,6 +17,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginBottom="25dp"
         android:text="@string/pacientSpin"
+        android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/listPacients"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,6 +29,7 @@
         android:layout_height="0dp"
         android:layout_marginStart="24dp"
         android:layout_marginBottom="183dp"
+        android:cacheColorHint="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titlePacient" />

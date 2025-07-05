@@ -5,6 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.LinearLayoutManager
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -37,6 +41,47 @@ class DoctorExamCheckFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_doctor_exam_check, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val firestoreHelper = FirestoreHelper()
+
+        val testreqestBtn: Button = view.findViewById(R.id.OrderTestBtn)
+
+        val recyclerView = view.findViewById<RecyclerView>(R.id.ExamsRecyclerView)
+
+        val email:String = arguments?.getString("email").toString()
+        val name:String = arguments?.getString("name").toString()
+        val doctor:String= arguments?.getString("userDoctorTest").toString()
+
+        val nameTxtView = view.findViewById<TextView>(R.id.nameDoctorCheckTitle)
+        nameTxtView.setText(name)
+
+        val examNames = arrayOf("Blood Test", "Urine Test", "Electrocardigram")
+        val examImages = intArrayOf(
+            R.drawable.bloodtest,
+            R.drawable.urinetest,
+            R.drawable.electrotest
+        )
+
+        val adapter = RecyclerAdapter(requireContext(), examImages, examNames)
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+
+
+        testreqestBtn.setOnClickListener {
+            val selection = adapter.getSelectedItems()
+            val testrequestdata = selectedPositionsToNumber(selection)
+            val insertTest = testrequest(name,email,testrequestdata,doctor)
+            firestoreHelper.testRequest(requireContext(), insertTest)
+
+        }
+
+
+    }
+
+
     companion object {
         /**
          * Use this factory method to create a new instance of
@@ -55,5 +100,13 @@ class DoctorExamCheckFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    fun selectedPositionsToNumber(selectedPositions: Set<Int>): Int {
+        var number = 0
+        for (pos in selectedPositions) {
+            number = number or (1 shl pos)
+        }
+        return number
     }
 }
