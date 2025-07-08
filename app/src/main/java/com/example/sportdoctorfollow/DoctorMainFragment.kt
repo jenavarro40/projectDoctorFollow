@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ListView
 import android.widget.ArrayAdapter
-import android.widget.Toast
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -66,7 +65,7 @@ class DoctorMainFragment : Fragment() {
                 examCheckfragment.arguments = bundle
 
                 parentFragmentManager.beginTransaction()
-                    .replace(R.id.fragmentContainerView, examCheckfragment)
+                    .replace(R.id.fragmentContainerDoctor, examCheckfragment)
                     .addToBackStack(null)
                     .commit()
 

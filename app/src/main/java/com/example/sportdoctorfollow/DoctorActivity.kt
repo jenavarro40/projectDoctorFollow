@@ -2,10 +2,6 @@ package com.example.sportdoctorfollow
 
 import android.os.Bundle
 import android.view.View
-import android.widget.ArrayAdapter
-import android.widget.Spinner
-import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -25,7 +21,7 @@ class DoctorActivity : AppCompatActivity() {
         }
         val userNameDoctor:String = intent.getStringExtra("email").toString()
         supportFragmentManager.beginTransaction()
-            .replace(R.id.fragmentContainerView, DoctorMainFragment.newInstance(userNameDoctor, "param2"))
+            .replace(R.id.fragmentContainerDoctor, DoctorMainFragment.newInstance(userNameDoctor, "param2"))
             .commit()
 
     }
