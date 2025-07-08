@@ -4,6 +4,7 @@ plugins {
     kotlin("plugin.serialization") version "1.9.0"
    //id("com.android.application")
     id("com.google.gms.google-services")
+    id ("kotlin-parcelize")
 }
 
 
@@ -14,7 +15,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.sportdoctorfollow"
-        minSdk = 25
+        minSdk = 26
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"

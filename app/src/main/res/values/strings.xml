@@ -23,7 +23,15 @@
     <string name="pacientMark">Pacient:</string>
     <string name="OrderExam">Order following Test to pacient:</string>
     <string name="OrderExamBtn">Order Test</string>
-    <string name="viewTestBtn" >View Test</string>
+    <string name="viewTestBtn">View Test</string>
     <string name="sugestedWorkoutsBtn">Get Suggested Workout</string>
-    <string name="UserFollow">Follow:</string>
+    <string name="UserFollow">Welcome you are in the profile of </string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="BloodPreasureTitle">"Blood Preasure: "</string>
+    <string name="WeightTitle">Weight:</string>
+    <string name="Fat_percentage">"Fat(%): "</string>
+    <string name="Heart_Rate">"Heart Rate: "</string>
+    <string name="Calories_Title">"Calories Burn: "</string>
+    <string name="Send_KPI">Send Data</string>
 </resources>

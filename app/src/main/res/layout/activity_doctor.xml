@@ -18,13 +18,13 @@
         android:text="@string/DoctorMainTitle"
         android:textColor="#888888"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/fragmentContainerView"
+        app:layout_constraintBottom_toTopOf="@+id/fragmentContainerDoctor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainerView"
+        android:id="@+id/fragmentContainerDoctor"
         android:name="com.example.sportdoctorfollow.DoctorExamCheckFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -33,4 +33,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/DoctorMainTitle" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,23 +9,37 @@
     tools:context=".UsersActivity">
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/userFollowTxtE"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="56dp"
         android:text="@string/UserFollow"
+        app:layout_constraintBottom_toTopOf="@+id/fragmetContainerUser"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.086"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/UserNameTxtE"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="92dp"
-        android:layout_marginTop="24dp"
-        android:text="TextView"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/userFollowTxtE" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmetContainerUser"
+        android:name="com.example.sportdoctorfollow.UserFragmentMain"
+        android:layout_width="406dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.97"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userFollowTxtE" />
 </androidx.constraintlayout.widget.ConstraintLayout>

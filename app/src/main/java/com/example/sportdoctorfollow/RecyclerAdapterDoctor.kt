@@ -9,13 +9,13 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 
-class RecyclerAdapter(
+class RecyclerAdapterDoctor(
     private val context: Context,
     private val imageExams: IntArray,
     private val exams: Array<String>,
     private val selectedItems: MutableSet<Int> = mutableSetOf<Int>()
 ) :
-    RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
+    RecyclerView.Adapter<RecyclerAdapterDoctor.ViewHolder>() {
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         val v = LayoutInflater.from(viewGroup.context)
             .inflate(R.layout.layout_recycler_exams, viewGroup, false)

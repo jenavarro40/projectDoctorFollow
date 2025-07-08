@@ -121,25 +121,37 @@ class FirestoreHelper {
             }
     }
 
-    fun getUsersone(context: Context,usermail:String, result: (String) -> Unit) {
+    fun getUsersone(context: Context,userMail:String, result: (users) -> Unit) {
         db.collection("users")
-            .whereEqualTo("email", usermail)
+            .whereEqualTo("email", userMail)
             .limit(1)
             .get()
             .addOnSuccessListener { documents ->
                 if (!documents.isEmpty) {
                     val user = documents.first().toObject(users::class.java)
-                    result(user.name)
+                    result(user)
 
                 } else {
                     Toast.makeText(context, "There was aproblem please Check", Toast.LENGTH_SHORT).show()
-                    result("")
+                    result(users())
                 }
             }
             .addOnFailureListener {exception ->
 
                 Log.w("FirestoreHelper", "Error in read user", exception)
             }
+    }
+
+    fun insertKPI(context: Context, insert: InsertKpi ) {
+         db.collection("InsertKPI")
+             .add(insert)
+             .addOnSuccessListener { documentReference ->
+                 Log.d("FirestoreHelper", "Insert Data of: ${insert.name}")
+                 Toast.makeText(context, "Insert Data of: ${insert.name} at ${insert.date}", Toast.LENGTH_SHORT).show()
+             }
+             .addOnFailureListener { e ->
+                 Log.w("FirestoreHelper", "Error insert Data", e)
+             }
     }
 
 

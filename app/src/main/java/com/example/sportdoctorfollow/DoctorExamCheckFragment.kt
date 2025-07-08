@@ -46,7 +46,7 @@ class DoctorExamCheckFragment : Fragment() {
 
         val firestoreHelper = FirestoreHelper()
 
-        val testreqestBtn: Button = view.findViewById(R.id.OrderTestBtn)
+        val testreqestBtn: Button = view.findViewById(R.id.SendDataBtn)
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.ExamsRecyclerView)
 
@@ -64,7 +64,7 @@ class DoctorExamCheckFragment : Fragment() {
             R.drawable.electrotest
         )
 
-        val adapter = RecyclerAdapter(requireContext(), examImages, examNames)
+        val adapter = RecyclerAdapterDoctor(requireContext(), examImages, examNames)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
