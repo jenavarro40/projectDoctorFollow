@@ -98,9 +98,7 @@ class UserFragmentInsertKpi : Fragment() {
                     val firestoreHelper=FirestoreHelper()
                     firestoreHelper.insertKPI(requireContext(),pacientData)
                     user?.let {
-                        parentFragmentManager.beginTransaction()
-                            .replace(R.id.fragmetContainerUser, UserFragmentMain.newInstance(it, ""))
-                            .commit()
+                        parentFragmentManager.popBackStack()
                     } ?: showToast("User data is missing")
 
                 }
