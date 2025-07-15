@@ -154,6 +154,30 @@ class FirestoreHelper {
              }
     }
 
+    fun getKpiUsers(context: Context,userMail:String,userKPI: (List<InsertKpi>) -> Unit) {
+        db.collection("InsertKPI")
+            .whereEqualTo("email", userMail)
+            .get()
+            .addOnSuccessListener { documents ->
+                if (!documents.isEmpty) {
+                    val kpiList = mutableListOf<InsertKpi>()
+                    for (doc in documents){
+                        val kpi = doc.toObject(InsertKpi::class.java)
+                        kpiList.add(kpi)
+                    }
+                    userKPI(kpiList)
+
+                } else {
+                    Toast.makeText(context, "There is not data for ${userMail}", Toast.LENGTH_SHORT).show()
+                    userKPI(mutableListOf())
+                }
+            }
+            .addOnFailureListener {exception ->
+
+                Log.w("FirestoreHelper", "Error in read pacients", exception)
+            }
+    }
+
 
     private fun hashPassword(password: String): String {
         return at.favre.lib.crypto.bcrypt.BCrypt.withDefaults()

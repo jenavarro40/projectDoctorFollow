@@ -55,6 +55,7 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation ("androidx.activity:activity-compose:1.7.2")
+    implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
 
     // Supabase SDK + Ktor
 

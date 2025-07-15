@@ -74,36 +74,27 @@ class UserFragmentInsertKpi : Fragment() {
                  weightTxt.text.toString().toDouble() <= 0 || weightTxt.text.toString()
                     .toDouble() > 500 || weightTxt.text.toString()
                     .isBlank() ->
-                    showToast("Please enter a correct phone number")
+                    showToast("Please enter a correct Weight")
 
                 fatTxt.text.toString().toDouble() <= 0 || fatTxt.text.toString()
-                    .toDouble() > 500 || fatTxt.text.toString()
+                    .toDouble() > 100 || fatTxt.text.toString()
                     .isBlank() ->
-                    showToast("Please enter a correct e-mail address")
+                    showToast("Please enter a correct (%) between 0 to 100")
 
                 heartRateTxt.text.toString().toInt() <= 0 || heartRateTxt.text.toString()
-                    .toInt() > 500 || heartRateTxt.text.toString()
+                    .toInt() > 300 || heartRateTxt.text.toString()
                     .isBlank() ->
-                    showToast("Please enter a correct password")
+                    showToast("Please enter a Heart Rate")
 
                 caloriesTxt.text.toString().toInt() <= 0 || caloriesTxt.text.toString()
-                    .toInt() > 500 || caloriesTxt.text.toString()
+                    .toInt() > 10000 || caloriesTxt.text.toString()
                     .isBlank() ->
-                    showToast("Please select one type of user")
+                    showToast("Please enter a correct Value of Calories")
 
                 else -> {
                     pacientData=InsertKpi(user?.name.toString(),user?.email.toString(),bloodPreasureSisTxt.text.toString().toInt(),bloodPreasureDiasTxt.text.toString().toInt(),
                         heartRateTxt.text.toString().toInt(),fatTxt.text.toString().toDouble(),weightTxt.text.toString().toDouble(), caloriesTxt.text.toString().toInt())
-                    /*    val name:String = "",
-                            val email: String = "",
-                            val bloodPreasureSis:Int = 0,
-                            val bloodPreasureDia:Int = 0,
-                            val heartRate:Int =0,
-                            val fatRate:Double=0.0,
-                            val weight:Double=0.0,
-                            val calories :Int=0,
-                            val workout:String="",
-                            val date:LocalDateTime=LocalDateTime.now()*/
+
                     val firestoreHelper=FirestoreHelper()
                     firestoreHelper.insertKPI(requireContext(),pacientData)
                     user?.let {

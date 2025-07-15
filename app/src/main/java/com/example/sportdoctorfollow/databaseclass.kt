@@ -2,7 +2,9 @@ package com.example.sportdoctorfollow
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
+
 import java.time.LocalDateTime
+import com.google.firebase.Timestamp
 
 //import com.google.firebase.crashlytics.buildtools.reloc.org.apache.commons.logging.Log
 
@@ -35,7 +37,7 @@ data class InsertKpi (
     val weight:Double=0.0,
     val calories :Int=0,
     val workout:String="",
-    val date:LocalDateTime=LocalDateTime.now()
+    val date: Timestamp = Timestamp.now()
 ): Parcelable
 
 

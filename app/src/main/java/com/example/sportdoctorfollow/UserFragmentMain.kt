@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val USER = "user"
-private const val ARG_PARAM2 = "param2"
+private const val EMAIL = "email"
 
 /**
  * A simple [Fragment] subclass.
@@ -25,7 +25,7 @@ private const val ARG_PARAM2 = "param2"
 class UserFragmentMain : Fragment() {
     // TODO: Rename and change types of parameters
     private var user: users? = null
-    private var param2: String? = null
+    private var email: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +36,7 @@ class UserFragmentMain : Fragment() {
                 @Suppress("DEPRECATION")
                 it.getParcelable(USER)
             }
-            param2 = it.getString(ARG_PARAM2)
+            email = it.getString(EMAIL)
         }
     }
 
@@ -101,7 +101,7 @@ class UserFragmentMain : Fragment() {
             }
             4 -> {
                 parentFragmentManager.beginTransaction()
-                    .replace(R.id.fragmetContainerUser, UserFragmentTrend())
+                    .replace(R.id.fragmetContainerUser, UserFragmentTrend.newInstance(email!!,""))
                     .addToBackStack(null)
                     .commit()
 
@@ -124,11 +124,11 @@ class UserFragmentMain : Fragment() {
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(user: users, param2: String) =
+        fun newInstance(user: users, email: String) =
             UserFragmentMain().apply {
                 arguments = Bundle().apply {
                     putParcelable(USER, user)
-                    putString(ARG_PARAM2, param2)
+                    putString(EMAIL, email)
                 }
             }
     }
