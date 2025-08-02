@@ -34,4 +34,7 @@
     <string name="Heart_Rate">"Heart Rate: "</string>
     <string name="Calories_Title">"Calories Burn: "</string>
     <string name="Send_KPI">Send Data</string>
+    <string name="upload_test">Upload</string>
+    <string name="upload_test_order_by_doctor">Upload Test order by Doctor</string>
+    <string name="testimage">test</string>
 </resources>

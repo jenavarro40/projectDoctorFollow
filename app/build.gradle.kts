@@ -57,13 +57,8 @@ dependencies {
     implementation ("androidx.activity:activity-compose:1.7.2")
     implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
 
-    // Supabase SDK + Ktor
 
-    /*implementation(platform("io.github.jan-tennert.supabase:bom:1.3.0-rc-2"))
-    implementation("io.github.jan-tennert.supabase:postgrest-kt")
-    implementation("io.github.jan-tennert.supabase:auth-kt:3.0.0")
-    implementation("io.github.jan-tennert.supabase:realtime-kt")
-    implementation("io.ktor:ktor-client-android:2.3.2")*/
+
     // subroutines to sen to the database
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
@@ -71,6 +66,7 @@ dependencies {
 
     implementation(platform("com.google.firebase:firebase-bom:33.15.0"))
     implementation("com.google.firebase:firebase-analytics")
+    implementation("com.google.firebase:firebase-storage-ktx")
     implementation("at.favre.lib:bcrypt:0.9.0")
 
 }

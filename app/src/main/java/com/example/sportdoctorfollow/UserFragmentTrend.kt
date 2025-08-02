@@ -1,10 +1,12 @@
 package com.example.sportdoctorfollow
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -46,8 +48,10 @@ class UserFragmentTrend : Fragment() {
         return inflater.inflate(R.layout.fragment_user_trend, container, false)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val title:TextView=view.findViewById(R.id.graphTitleTxt)
         val lineChart: LineChart = view.findViewById(R.id.lineChart)
 
         /*val fechas = listOf("2025-07-01", "2025-07-02", "2025-07-03", "2025-07-04")
@@ -55,7 +59,8 @@ class UserFragmentTrend : Fragment() {
         val valores2 = listOf(5f, 18f, 12f, 22f)*/
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerViewHorizontal)
-        recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        recyclerView.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
         val imageList = listOf(
             R.drawable.bloodpreasure,
@@ -65,15 +70,80 @@ class UserFragmentTrend : Fragment() {
             R.drawable.heartrate
         )
 
-        recyclerView.adapter = RecyclerAdapterRoundButton(imageList)
+        recyclerView.adapter = RecyclerAdapterRoundButton(imageList) { position ->
+            val firestoreHelper = FirestoreHelper()
+            when (position) {
+                0 -> {
+                    title.setText("Blood Preasure")
+                    firestoreHelper.getKpiUsers(requireContext(), eMail.toString(), { userKpi ->
+
+                        val graphCons = graphKPI()
+                        graphCons.graphKPI(
+                            requireContext(),
+                            lineChart,
+                            userKpi,
+                            "Diastole",
+                            "Sistole"
+                        )
+                    })
+                }
+
+                1 -> {
+                    firestoreHelper.getKpiUsers(requireContext(), eMail.toString(), { userKpi ->
+                        title.setText("Weight")
+                        val graphCons = graphKPI()
+                        graphCons.graphKPI(
+                            requireContext(),
+                            lineChart,
+                            userKpi,
+                            "Weight",
+                            ""
+                        )
+                    })
+                }
+                2-> {
+                    firestoreHelper.getKpiUsers(requireContext(), eMail.toString(), { userKpi ->
+                        title.setText("Calories")
+                        val graphCons = graphKPI()
+                        graphCons.graphKPI(
+                            requireContext(),
+                            lineChart,
+                            userKpi,
+                            "Calories",
+                            ""
+                        )
+                    })
+                }
+                3-> {
+                    firestoreHelper.getKpiUsers(requireContext(), eMail.toString(), { userKpi ->
+                        title.setText("Fat(%)")
+                        val graphCons = graphKPI()
+                        graphCons.graphKPI(
+                            requireContext(),
+                            lineChart,
+                            userKpi,
+                            "Fat(%)",
+                            ""
+                        )
+                    })
+                }
+                4-> {
+                    firestoreHelper.getKpiUsers(requireContext(), eMail.toString(), { userKpi ->
+                        title.setText("Heart Rate")
+                        val graphCons = graphKPI()
+                        graphCons.graphKPI(
+                            requireContext(),
+                            lineChart,
+                            userKpi,
+                            "Heart Rate",
+                            ""
+                        )
+                    })
+                }
+            }
+        }
 
 
-
-        val firestoreHelper = FirestoreHelper()
-        firestoreHelper.getKpiUsers(requireContext(),eMail.toString(), { userKpi ->
-            val graphCons=graphKPI()
-            graphCons.graphKPI(requireContext(),lineChart,userKpi,2,"Diastole","Sistole")
-        })
     }
 
     companion object {

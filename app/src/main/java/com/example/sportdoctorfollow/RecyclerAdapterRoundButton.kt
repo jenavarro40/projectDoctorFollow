@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 
-class RecyclerAdapterRoundButton(private val images: List<Int>) :
+class RecyclerAdapterRoundButton(private val images: List<Int>, private val selectedItem: (Int) -> Unit) :
     RecyclerView.Adapter<RecyclerAdapterRoundButton.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -21,7 +21,12 @@ class RecyclerAdapterRoundButton(private val images: List<Int>) :
 
     override fun getItemCount() = images.size
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.image.setImageResource(images[position])
+    override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
+        viewHolder.image.setImageResource(images[position])
+
+        viewHolder.itemView.setOnClickListener {
+            selectedItem(position)
+            //Toast.makeText(context,selectedItem.toString(),Toast.LENGTH_SHORT).show()
+        }
     }
 }

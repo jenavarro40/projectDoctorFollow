@@ -20,34 +20,47 @@ class graphKPI {
         context: Context,
         lineChart: LineChart,
         userKpi: List<InsertKpi>,
-        graphNumber: Int,
+        //graphNumber: Int,
         kpiName1: String,
         kpiName2: String
 
     ) {
         val dateData: MutableList<String> = mutableListOf()
-        val dateParam1: MutableList<Int> = mutableListOf()
-        val dateParam2: MutableList<Int> = mutableListOf()
+        val dateParam1: MutableList<Float> = mutableListOf()
+        val dateParam2: MutableList<Float> = mutableListOf()
         val formatdate = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
 
         for (pac in userKpi) {
             val localDateTime =
                 pac.date.toDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime()
-            Toast.makeText(context, localDateTime.format(formatdate), Toast.LENGTH_SHORT).show()
+            //Toast.makeText(context, localDateTime.format(formatdate), Toast.LENGTH_SHORT).show()
             dateData.add(localDateTime.format(formatdate))
-            dateParam1.add(pac.bloodPreasureDia)
-            if (graphNumber==2) {
-                dateParam2.add(pac.bloodPreasureSis)
+            if (kpiName1 == "Diastole") {
+                dateParam1.add(pac.bloodPreasureDia.toFloat())
+                dateParam2.add(pac.bloodPreasureSis.toFloat())
+            }
+            else if (kpiName1 == "Weight"){
+                dateParam1.add(pac.weight.toFloat())
+            }
+            else if (kpiName1 == "Calories"){
+                dateParam1.add(pac.calories.toFloat())
+            }
+            else if (kpiName1 == "Fat(%)"){
+                dateParam1.add(pac.fatRate.toFloat())
+            }
+            else if (kpiName1 == "Heart Rate"){
+                dateParam1.add(pac.heartRate.toFloat())
             }
         }
+
 
 
         var entries1 = ArrayList<Entry>()
         var entries2 = ArrayList<Entry>()
         for ((index, value) in dateParam1.withIndex()) {
-            entries1.add(Entry(index.toFloat(), value.toFloat()))
-            if (graphNumber==2) {
-                entries2.add(Entry(index.toFloat(), dateParam2[index].toFloat()))
+            entries1.add(Entry(index.toFloat(), value))
+            if (kpiName1 == "Diastole") {
+                entries2.add(Entry(index.toFloat(), dateParam2[index]))
             }
         }
 
@@ -59,7 +72,7 @@ class graphKPI {
         dataSet1.circleRadius = 5f
         dataSet1.setDrawValues(false)
 
-        val lineData: LineData = if (graphNumber == 2) {
+        val lineData: LineData = if (kpiName1 == "Diastole") {
             val dataSet2 = LineDataSet(entries2,kpiName2)
             dataSet2.color = "#ff6f00".toColorInt()
             dataSet2.setCircleColor("#ffcc80".toColorInt())
@@ -86,4 +99,6 @@ class graphKPI {
 
         lineChart.invalidate()
     }
+
+
 }

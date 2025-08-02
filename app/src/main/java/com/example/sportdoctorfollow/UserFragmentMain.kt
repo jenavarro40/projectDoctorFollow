@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
+
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val USER = "user"
@@ -54,7 +55,7 @@ class UserFragmentMain : Fragment() {
 
 
         val userActivitiesNames =
-            arrayOf("Upload Test", "Insert Activity", "Test Order", "View Workout","Trend")
+            arrayOf("Upload Test","Insert Activity", "Test Order", "View Workout","Trend")
         val userActivitiesImages = intArrayOf(
             R.drawable.upload,
             R.drawable.activity,
@@ -72,7 +73,7 @@ class UserFragmentMain : Fragment() {
         when (position) {
             0 -> {
                 parentFragmentManager.beginTransaction()
-                    .replace(R.id.fragmetContainerUser, UserFragmentUpload())
+                    .replace(R.id.fragmetContainerUser, UserFragmentUpload.newInstance(email!!,""))
                     .addToBackStack(null)
                     .commit()
 
