@@ -1,10 +1,12 @@
 package com.example.sportdoctorfollow
 
 import android.content.Context
+import android.net.Uri
 import android.util.Log
 import android.widget.Toast
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 
 class FirestoreHelper {
     private val db = Firebase.firestore
@@ -152,6 +154,89 @@ class FirestoreHelper {
              .addOnFailureListener { e ->
                  Log.w("FirestoreHelper", "Error insert Data", e)
              }
+    }
+
+    fun getKpiUsers(context: Context,userMail:String,userKPI: (List<InsertKpi>) -> Unit) {
+        db.collection("InsertKPI")
+            .whereEqualTo("email", userMail)
+            .get()
+            .addOnSuccessListener { documents ->
+                if (!documents.isEmpty) {
+                    val kpiList = mutableListOf<InsertKpi>()
+                    for (doc in documents){
+                        val kpi = doc.toObject(InsertKpi::class.java)
+                        kpiList.add(kpi)
+                    }
+                    userKPI(kpiList)
+
+                } else {
+                    Toast.makeText(context, "There is not data for ${userMail}", Toast.LENGTH_SHORT).show()
+                    userKPI(mutableListOf())
+                }
+            }
+            .addOnFailureListener {exception ->
+
+                Log.w("FirestoreHelper", "Error in read pacients", exception)
+            }
+    }
+
+    fun uploadUserFile(context: Context, userMail: String, fileUri: Uri, onResult: (Boolean) -> Unit) {
+        val storageRef = Firebase.storage.reference
+        var name: String? = null
+        val cursor = context.contentResolver.query(fileUri, null, null, null, null)
+        cursor?.use {
+            if (it.moveToFirst()) {
+                val index = it.getColumnIndex(android.provider.OpenableColumns.DISPLAY_NAME)
+                if (index != -1) {
+                    name = it.getString(index)
+                }
+            }
+        }
+        val fileName = "${userMail}_${name}_${System.currentTimeMillis()}"
+        //val safeFileName = "${userMail.replace("[^a-zA-Z0-9]".toRegex(), "_")}_${System.currentTimeMillis()}"
+        val fileRef = storageRef.child("user_files/$fileName")
+
+        try {
+            val stream = context.contentResolver.openInputStream(fileUri)
+            if (stream == null) {
+                Toast.makeText(context, "Cannot open selected file", Toast.LENGTH_LONG).show()
+                onResult(false)
+                return
+            }
+            fileRef.putStream(stream)
+                .addOnSuccessListener {
+                    stream.close()
+                    fileRef.downloadUrl.addOnSuccessListener { downloadUrl ->
+                        val fileData = mapOf(
+                            "email" to userMail,
+                            "fileUrl" to downloadUrl.toString(),
+                            "uploadedAt" to System.currentTimeMillis()
+                        )
+                        Firebase.firestore.collection("user_files")
+                            .add(fileData)
+                            .addOnSuccessListener {
+                                Toast.makeText(context, "File uploaded successfully", Toast.LENGTH_SHORT).show()
+                                onResult(true)
+                            }
+                            .addOnFailureListener { e ->
+                                Log.e("FirestoreHelper", "Error saving file info", e)
+                                onResult(false)
+                            }
+                    }.addOnFailureListener { e ->
+                        Log.e("FirestoreHelper", "Error getting download URL", e)
+                        onResult(false)
+                    }
+                }
+                .addOnFailureListener { e ->
+                    Log.e("FirestoreHelper", "Error uploading file", e)
+                    Toast.makeText(context, "Failed to upload file", Toast.LENGTH_SHORT).show()
+                    onResult(false)
+                }
+        } catch (e: Exception) {
+            Log.e("UPLOAD", "File not accessible: $fileUri", e)
+            Toast.makeText(context, "Cannot access the selected file", Toast.LENGTH_LONG).show()
+            onResult(false)
+        }
     }
 
 

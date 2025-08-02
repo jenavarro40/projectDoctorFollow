@@ -29,7 +29,7 @@ class UsersActivity : AppCompatActivity() {
             user=result
             userNameTxtE.setText(user.name)
             supportFragmentManager.beginTransaction()
-                .replace(R.id.fragmetContainerUser, UserFragmentMain.newInstance(user,""))
+                .replace(R.id.fragmetContainerUser, UserFragmentMain.newInstance(user,userNameEmail))
                 .commit()
 
 
