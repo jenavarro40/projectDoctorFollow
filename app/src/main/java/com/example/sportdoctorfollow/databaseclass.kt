@@ -3,7 +3,6 @@ package com.example.sportdoctorfollow
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
-import java.time.LocalDateTime
 import com.google.firebase.Timestamp
 
 //import com.google.firebase.crashlytics.buildtools.reloc.org.apache.commons.logging.Log
@@ -46,4 +45,11 @@ data class TrainRequest (
     val email: String = "",
     val trainRequest:Int = 0,
     val trainee:String = ""
+): Parcelable
+
+@Parcelize
+data class FoodRequest (
+    val name:String = "",
+    val email: String = "",
+    val nutritionist:String = ""
 ): Parcelable
