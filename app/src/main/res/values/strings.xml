@@ -19,14 +19,13 @@
     <string name="Beginner">Beginner</string>
     <string name="RegisterBtn">Register</string>
     <string name="pacientSpin">Pacient :</string>
-    <string name="DoctorMainTitle">Doctor Main</string>
+    <string name="DoctorMainTitle">Choose de Pacient User</string>
     <string name="pacientMark">Pacient:</string>
     <string name="OrderExam">Order following Test to pacient:</string>
     <string name="OrderExamBtn">Order Test</string>
-    <string name="viewTestBtn">View Test</string>
+    <string name="viewTestBtn">Download Pacient Test</string>
     <string name="sugestedWorkoutsBtn">Get Suggested Workout</string>
     <string name="UserFollow">Welcome you are in the profile of </string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="BloodPreasureTitle">"Blood Preasure: "</string>
     <string name="WeightTitle">Weight:</string>
@@ -37,4 +36,7 @@
     <string name="upload_test">Upload</string>
     <string name="upload_test_order_by_doctor">Upload Test order by Doctor</string>
     <string name="testimage">test</string>
+    <string name="the_required_test_are">The required test are:</string>
+    <string name="sendWorkout">Send Workout</string>
+    <string name="WorkOutTitle">Work Out Available</string>
 </resources>

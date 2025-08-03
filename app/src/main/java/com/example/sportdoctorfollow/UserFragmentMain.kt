@@ -88,7 +88,7 @@ class UserFragmentMain : Fragment() {
             }
             2 -> {
                 parentFragmentManager.beginTransaction()
-                    .replace(R.id.fragmetContainerUser, UserFragmentShowOrderTest())
+                    .replace(R.id.fragmetContainerUser, UserFragmentShowOrderTest.newInstance(email!!,""))
                     .addToBackStack(null)
                     .commit()
 

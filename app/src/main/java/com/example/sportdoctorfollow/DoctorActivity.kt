@@ -20,9 +20,14 @@ class DoctorActivity : AppCompatActivity() {
             insets
         }
         val userNameDoctor:String = intent.getStringExtra("email").toString()
+        val typeOfUser=intent.getIntExtra("typeOfUser",0)
         supportFragmentManager.beginTransaction()
-            .replace(R.id.fragmentContainerDoctor, DoctorMainFragment.newInstance(userNameDoctor, "param2"))
+            .replace(R.id.fragmentContainerDoctor, DoctorMainFragment.newInstance(userNameDoctor, typeOfUser))
             .commit()
+
+
+
+
 
     }
 }

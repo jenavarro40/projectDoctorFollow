@@ -55,18 +55,21 @@ class MainActivity : AppCompatActivity() {
                             startActivity(intent)
                         }
                         3 ->{
-                            val intent = Intent(this, FoodActivity::class.java)
+                            val intent = Intent(this, DoctorActivity::class.java)
                             intent.putExtra("email", userNameTxtE.text.toString())
+                            intent.putExtra("typeOfUser",typeofuser)
                             startActivity(intent)
                         }
                         4 ->{
-                            val intent = Intent(this, ExorciseActivity::class.java)
+                            val intent = Intent(this, DoctorActivity::class.java)
                             intent.putExtra("email", userNameTxtE.text.toString())
+                            intent.putExtra("typeOfUser",typeofuser)
                             startActivity(intent)
                         }
                         5 ->{
                             val intent = Intent(this, DoctorActivity::class.java)
                             intent.putExtra("email", userNameTxtE.text.toString())
+                            intent.putExtra("typeOfUser",typeofuser)
                             startActivity(intent)
                         }
                     }

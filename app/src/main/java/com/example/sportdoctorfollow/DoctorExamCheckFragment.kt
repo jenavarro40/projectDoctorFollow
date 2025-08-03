@@ -12,8 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+private const val ARG_EMAIL= "email"
+private const val ARG_NAME = "name"
+private const val ARG_DOCTOR = "doctor"
 
 /**
  * A simple [Fragment] subclass.
@@ -22,14 +23,16 @@ private const val ARG_PARAM2 = "param2"
  */
 class DoctorExamCheckFragment : Fragment() {
     // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var email: String? = null
+    private var name: String? = null
+    private var doctor: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            email = it.getString(ARG_EMAIL)
+            name= it.getString(ARG_NAME)
+            doctor= it.getString(ARG_DOCTOR)
         }
     }
 
@@ -47,12 +50,9 @@ class DoctorExamCheckFragment : Fragment() {
         val firestoreHelper = FirestoreHelper()
 
         val testreqestBtn: Button = view.findViewById(R.id.SendDataBtn)
+        val viewTest: Button=view.findViewById(R.id.ViewTestBTn)
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.ExamsRecyclerView)
-
-        val email:String = arguments?.getString("email").toString()
-        val name:String = arguments?.getString("name").toString()
-        val doctor:String= arguments?.getString("userDoctorTest").toString()
 
         val nameTxtView = view.findViewById<TextView>(R.id.nameDoctorCheckTitle)
         nameTxtView.setText(name)
@@ -73,8 +73,12 @@ class DoctorExamCheckFragment : Fragment() {
         testreqestBtn.setOnClickListener {
             val selection = adapter.getSelectedItems()
             val testrequestdata = selectedPositionsToNumber(selection)
-            val insertTest = testrequest(name,email,testrequestdata,doctor)
+            val insertTest = testrequest(name!!,email!!,testrequestdata,doctor!!)
             firestoreHelper.testRequest(requireContext(), insertTest)
+
+        }
+        viewTest.setOnClickListener {
+            FirestoreHelper().getUserFiles(requireContext(),email!!)
 
         }
 
@@ -93,11 +97,12 @@ class DoctorExamCheckFragment : Fragment() {
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance(email: String, name: String, doctor: String) =
             DoctorExamCheckFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+                    putString(ARG_EMAIL, email)
+                    putString(ARG_NAME ,name)
+                    putString(ARG_DOCTOR ,doctor)
                 }
             }
     }

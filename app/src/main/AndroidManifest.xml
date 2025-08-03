@@ -17,12 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SportDoctorFollow"
         tools:targetApi="31">
-        <activity
-            android:name=".ExorciseActivity"
-            android:exported="false" />
-        <activity
-            android:name=".FoodActivity"
-            android:exported="false" />
+
         <activity
             android:name=".UsersActivity"
             android:exported="false" />

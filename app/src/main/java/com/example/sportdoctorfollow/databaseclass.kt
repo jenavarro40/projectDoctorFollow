@@ -40,6 +40,10 @@ data class InsertKpi (
     val date: Timestamp = Timestamp.now()
 ): Parcelable
 
-
-
-
+@Parcelize
+data class trainRequest (
+    val name:String = "",
+    val email: String = "",
+    val trainRequest:Int = 0,
+    val trainee:String = ""
+): Parcelable

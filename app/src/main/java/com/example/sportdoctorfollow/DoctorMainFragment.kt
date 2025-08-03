@@ -7,11 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ListView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_USER_DOCTOR = "userDoctor"
-private const val ARG_PARAM2 = "param2"
+private const val ARG_TUSER = "typeOfUser"
 
 /**
  * A simple [Fragment] subclass.
@@ -21,13 +22,13 @@ private const val ARG_PARAM2 = "param2"
 class DoctorMainFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var userDoctor: String? = null
-    private var param2: String? = null
+    private var typeOfUser: Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             userDoctor = it.getString(ARG_USER_DOCTOR)
-            param2 = it.getString(ARG_PARAM2)
+            typeOfUser = it.getInt(ARG_TUSER)
         }
     }
 
@@ -56,6 +57,7 @@ class DoctorMainFragment : Fragment() {
 
             listView.setOnItemClickListener { _, _, position, _ ->
                 val examCheckfragment = DoctorExamCheckFragment()
+
                 val bundle = Bundle()
                 bundle.putString("email", pacients[position].first)
                 bundle.putString("name",pacients[position].second)
@@ -64,11 +66,31 @@ class DoctorMainFragment : Fragment() {
 
                 examCheckfragment.arguments = bundle
 
-                parentFragmentManager.beginTransaction()
-                    .replace(R.id.fragmentContainerDoctor, examCheckfragment)
-                    .addToBackStack(null)
-                    .commit()
+                when(typeOfUser){
+                    5->{
+                        parentFragmentManager.beginTransaction()
+                            .replace(R.id.fragmentContainerDoctor, examCheckfragment)
+                            .addToBackStack(null)
+                            .commit()
 
+                    }
+                    4->{
+                        parentFragmentManager.beginTransaction()
+                            .replace(R.id.fragmentContainerDoctor, DoctorExorciseFragment.newInstance(
+                                pacients[position].first,pacients[position].second,userDoctor!!
+                            ))
+                            .addToBackStack(null)
+                            .commit()
+                    }
+                    3->{
+                        parentFragmentManager.beginTransaction()
+                            .replace(R.id.fragmentContainerDoctor, DoctorExorciseFragment.newInstance(
+                                pacients[position].first,pacients[position].second,userDoctor!!
+                            ))
+                            .addToBackStack(null)
+                            .commit()
+                    }
+                }
             }
 
         })
@@ -85,11 +107,11 @@ class DoctorMainFragment : Fragment() {
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(userDoctor: String, param2: String) =
+        fun newInstance(userDoctor: String, typeOfUser: Int) =
             DoctorMainFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_USER_DOCTOR, userDoctor)
-                    putString(ARG_PARAM2, param2)
+                    putInt(ARG_TUSER, typeOfUser)
                 }
             }
 

@@ -6,10 +6,13 @@ import android.util.Log
 import android.widget.Toast
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
+import java.io.File
 
 class FirestoreHelper {
     private val db = Firebase.firestore
+    private val storage = FirebaseStorage.getInstance()
 
 
     fun addUser(context: Context, user: users) {
@@ -122,6 +125,89 @@ class FirestoreHelper {
                 Log.w("FirestoreHelper", "Error in check user", exception)
             }
     }
+
+    fun getTestRequest(context: Context,userMail:String, result: (testrequest) -> Unit) {
+        db.collection("testrequest")
+            .whereEqualTo("email", userMail)
+            .limit(1)
+            .get()
+            .addOnSuccessListener { documents ->
+                if (!documents.isEmpty) {
+                    val tests = documents.first().toObject(testrequest::class.java)
+                    result(tests)
+
+                } else {
+                    Toast.makeText(context, "No exams", Toast.LENGTH_SHORT).show()
+                    result(testrequest())
+                }
+            }
+            .addOnFailureListener {exception ->
+
+                Log.w("FirestoreHelper", "Error in read test", exception)
+            }
+
+    }
+    fun trainRequest(context: Context, request: trainRequest ) {
+        db.collection("trainRequest")
+            .whereEqualTo("email", request.email)
+            .limit(1)
+            .get()
+            .addOnSuccessListener { documents ->
+                if (documents.isEmpty){
+                    db.collection("trainRequest")
+                        .add(request)
+                        .addOnSuccessListener { documentReference ->
+                            Log.d("FirestoreHelper", "Requested train: ${request.name}")
+                            Toast.makeText(context, "Requested train: ${documentReference.id}", Toast.LENGTH_SHORT).show()
+                        }
+                        .addOnFailureListener { e ->
+                            Log.w("FirestoreHelper", "Error Requestedtrain", e)
+                        }
+
+                }
+                else {
+                    val docId = documents.documents[0].id
+                    val updateMap = mapOf("trainRequest" to request.trainRequest)
+
+                    db.collection("trainRequest").document(docId)
+                        .update(updateMap)
+                        .addOnSuccessListener {
+                            Log.d("FirestoreHelper", "Requested train updated for: ${request.email}")
+                            Toast.makeText(context, "Requested train updated", Toast.LENGTH_SHORT).show()
+                        }
+                        .addOnFailureListener { e ->
+                            Log.w("FirestoreHelper", "Error updating train request", e)
+                        }
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.w("FirestoreHelper", "Error in check user", exception)
+            }
+    }
+
+    fun getTrainRequest(context: Context,userMail:String, result: (trainRequest) -> Unit) {
+        db.collection("trainRequest")
+            .whereEqualTo("email", userMail)
+            .limit(1)
+            .get()
+            .addOnSuccessListener { documents ->
+                if (!documents.isEmpty) {
+                    val trains = documents.first().toObject(trainRequest::class.java)
+                    result(trains)
+
+                } else {
+                    Toast.makeText(context, "No exams", Toast.LENGTH_SHORT).show()
+                    result(trainRequest())
+                }
+            }
+            .addOnFailureListener {exception ->
+
+                Log.w("FirestoreHelper", "Error in read train", exception)
+            }
+
+    }
+
+
 
     fun getUsersone(context: Context,userMail:String, result: (users) -> Unit) {
         db.collection("users")
@@ -238,6 +324,37 @@ class FirestoreHelper {
             onResult(false)
         }
     }
+
+    fun getUserFiles(context: Context, email: String) {
+        val storageRef = Firebase.storage.reference.child("user_files")
+
+        storageRef.listAll()
+            .addOnSuccessListener { listResult ->
+
+                val userFiles = listResult.items.filter { it.name.startsWith(email) }
+
+                if (userFiles.isEmpty()) {
+                    Log.d("FirestoreHelper", "this  $email")
+                    return@addOnSuccessListener
+                }
+
+                for (fileRef in userFiles) {
+                    val localFile = File(context.getExternalFilesDir(null), fileRef.name)
+
+                    fileRef.getFile(localFile)
+                        .addOnSuccessListener {
+                            Toast.makeText(context, "Files from ${fileRef.name} download", Toast.LENGTH_SHORT).show()
+                        }
+                        .addOnFailureListener { e ->
+                            Log.e("FirestoreHelper", "Error download ${fileRef.name}: ${e.message}")
+                        }
+                }
+            }
+            .addOnFailureListener { e ->
+                Log.e("FirestoreHelper", "Error list files: ${e.message}")
+            }
+    }
+
 
 
     private fun hashPassword(password: String): String {
