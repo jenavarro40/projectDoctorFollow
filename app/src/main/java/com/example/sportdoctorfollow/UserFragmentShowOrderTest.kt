@@ -45,7 +45,9 @@ class UserFragmentShowOrderTest : Fragment() {
 
         firestoreHelper.getTestRequest(requireContext(),email!!) { result->
             testRequest=result
-            testRequired.setText(bitsToTest(testRequest.testrequest))
+            val test = listOf("Blood Test", "Urine Test", "Electrocardigram")
+            val bittodata=bitsToData()
+            testRequired.setText(bittodata.bitsToInfo(test,testRequest.testrequest))
         }
     }
 
@@ -67,7 +69,7 @@ class UserFragmentShowOrderTest : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
-        fun bitsToTest(value: Int): String {
+ /*       fun bitsToTest(value: Int): String {
             val test = listOf("Blood Test", "Urine Test", "Electrocardigram")
             val sb = StringBuilder()
 
@@ -77,6 +79,6 @@ class UserFragmentShowOrderTest : Fragment() {
                 }
             }
             return sb.toString()
-        }
+        }*/
     }
 }

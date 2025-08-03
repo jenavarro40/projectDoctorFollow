@@ -56,20 +56,12 @@ class DoctorMainFragment : Fragment() {
             listView.adapter = adapter
 
             listView.setOnItemClickListener { _, _, position, _ ->
-                val examCheckfragment = DoctorExamCheckFragment()
-
-                val bundle = Bundle()
-                bundle.putString("email", pacients[position].first)
-                bundle.putString("name",pacients[position].second)
-                bundle.putString("userDoctorTest",userDoctor)
-
-
-                examCheckfragment.arguments = bundle
 
                 when(typeOfUser){
                     5->{
                         parentFragmentManager.beginTransaction()
-                            .replace(R.id.fragmentContainerDoctor, examCheckfragment)
+                            .replace(R.id.fragmentContainerDoctor, DoctorExamCheckFragment.newInstance(
+                                pacients[position].first,pacients[position].second,userDoctor!!))
                             .addToBackStack(null)
                             .commit()
 
@@ -84,7 +76,7 @@ class DoctorMainFragment : Fragment() {
                     }
                     3->{
                         parentFragmentManager.beginTransaction()
-                            .replace(R.id.fragmentContainerDoctor, DoctorExorciseFragment.newInstance(
+                            .replace(R.id.fragmentContainerDoctor, DoctorFoodFragment.newInstance(
                                 pacients[position].first,pacients[position].second,userDoctor!!
                             ))
                             .addToBackStack(null)

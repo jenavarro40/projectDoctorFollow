@@ -41,7 +41,7 @@ data class InsertKpi (
 ): Parcelable
 
 @Parcelize
-data class trainRequest (
+data class TrainRequest (
     val name:String = "",
     val email: String = "",
     val trainRequest:Int = 0,

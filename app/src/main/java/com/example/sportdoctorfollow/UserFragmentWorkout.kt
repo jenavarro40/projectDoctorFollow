@@ -5,10 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
+private const val ARG_PARAM1 = "email"
 private const val ARG_PARAM2 = "param2"
 
 /**
@@ -18,13 +19,13 @@ private const val ARG_PARAM2 = "param2"
  */
 class UserFragmentWorkout : Fragment() {
     // TODO: Rename and change types of parameters
-    private var param1: String? = null
+    private var email: String? = null
     private var param2: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
+            email = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
     }
@@ -35,6 +36,19 @@ class UserFragmentWorkout : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_user_workout, container, false)
+    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        var trainRequest:TrainRequest=TrainRequest()
+        val firestoreHelper = FirestoreHelper()
+        val trainRequired: TextView =view.findViewById(R.id.workOutTrainTxt)
+
+        firestoreHelper.getTrainRequest(requireContext(),email!!) { result->
+            trainRequest=result
+            val train = listOf("Cardio", "Chest", "Leg","Shoulder","back","Arms")
+            val bittodata=bitsToData()
+            trainRequired.setText(bittodata.bitsToInfo(train,trainRequest.trainRequest))
+        }
     }
 
     companion object {
@@ -48,10 +62,10 @@ class UserFragmentWorkout : Fragment() {
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance(email: String, param2: String) =
             UserFragmentWorkout().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
+                    putString(ARG_PARAM1, email)
                     putString(ARG_PARAM2, param2)
                 }
             }

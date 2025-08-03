@@ -95,7 +95,7 @@ class UserFragmentMain : Fragment() {
             }
             3 -> {
                 parentFragmentManager.beginTransaction()
-                    .replace(R.id.fragmetContainerUser, UserFragmentWorkout())
+                    .replace(R.id.fragmetContainerUser, UserFragmentWorkout.newInstance(email!!,""))
                     .addToBackStack(null)
                     .commit()
 

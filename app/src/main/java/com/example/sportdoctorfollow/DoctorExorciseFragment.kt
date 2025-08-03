@@ -74,7 +74,7 @@ class DoctorExorciseFragment : Fragment() {
             val selection = adapter.getSelectedItems()
             val trainrequestdata = selectedPositionsToNumber(selection)
 
-            val insertTrain = trainRequest(name!!,email!!,trainrequestdata,doctor!!)
+            val insertTrain = TrainRequest(name!!,email!!,trainrequestdata,doctor!!)
             firestoreHelper.trainRequest(requireContext(), insertTrain)
 
         }

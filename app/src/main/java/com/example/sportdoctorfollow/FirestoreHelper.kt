@@ -147,7 +147,7 @@ class FirestoreHelper {
             }
 
     }
-    fun trainRequest(context: Context, request: trainRequest ) {
+    fun trainRequest(context: Context, request: TrainRequest ) {
         db.collection("trainRequest")
             .whereEqualTo("email", request.email)
             .limit(1)
@@ -185,19 +185,19 @@ class FirestoreHelper {
             }
     }
 
-    fun getTrainRequest(context: Context,userMail:String, result: (trainRequest) -> Unit) {
+    fun getTrainRequest(context: Context,userMail:String, result: (TrainRequest) -> Unit) {
         db.collection("trainRequest")
             .whereEqualTo("email", userMail)
             .limit(1)
             .get()
             .addOnSuccessListener { documents ->
                 if (!documents.isEmpty) {
-                    val trains = documents.first().toObject(trainRequest::class.java)
+                    val trains = documents.first().toObject(TrainRequest::class.java)
                     result(trains)
 
                 } else {
-                    Toast.makeText(context, "No exams", Toast.LENGTH_SHORT).show()
-                    result(trainRequest())
+                    Toast.makeText(context, "No Workout", Toast.LENGTH_SHORT).show()
+                    result(TrainRequest())
                 }
             }
             .addOnFailureListener {exception ->

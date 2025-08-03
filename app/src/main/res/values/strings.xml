@@ -39,4 +39,5 @@
     <string name="the_required_test_are">The required test are:</string>
     <string name="sendWorkout">Send Workout</string>
     <string name="WorkOutTitle">Work Out Available</string>
+    <string name="your_workout_is">Your Workout is:</string>
 </resources>
